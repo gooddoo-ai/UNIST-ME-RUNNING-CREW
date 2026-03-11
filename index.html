@@ -1,36 +1,24 @@
 <!DOCTYPE html>
 
-<html lang="ko">
+<html lang="ko" style="background:#0a0a0f;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UNIST ME 러닝크루 🏃</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --card: #1a1a28;
-    --border: #2a2a40;
-    --accent: #ff4d1c;
-    --accent2: #ff8c42;
-    --neon: #00f5a0;
-    --text: #f0f0f8;
-    --muted: #6060a0;
-    --track: #1e1e30;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-background: var(–bg);
-color: var(–text);
-font-family: ‘Noto Sans KR’, sans-serif;
+html, body {
+background-color: #0a0a0f !important;
+color: #f0f0f8;
+font-family: ‘Noto Sans KR’, ‘Apple SD Gothic Neo’, ‘Malgun Gothic’, sans-serif;
 min-height: 100vh;
 overflow-x: hidden;
 }
 
-/* Animated background */
 body::before {
 content: ‘’;
 position: fixed;
@@ -50,15 +38,11 @@ position: relative;
 z-index: 1;
 }
 
-/* HEADER */
-header {
-text-align: center;
-margin-bottom: 40px;
-}
+header { text-align: center; margin-bottom: 40px; }
 
 .badge {
 display: inline-block;
-background: var(–accent);
+background-color: #ff4d1c;
 color: white;
 font-size: 11px;
 font-weight: 700;
@@ -70,45 +54,41 @@ margin-bottom: 12px;
 }
 
 header h1 {
-font-family: ‘Bebas Neue’, cursive;
+font-family: ‘Bebas Neue’, ‘Black Han Sans’, Impact, ‘Arial Black’, sans-serif;
 font-size: clamp(42px, 8vw, 72px);
 letter-spacing: 4px;
 line-height: 1;
-color: var(–text);
+color: #f0f0f8;
 }
 
-header h1 span {
-color: var(–accent);
-}
+header h1 .accent { color: #ff4d1c; }
 
 .subtitle {
 font-size: 13px;
-color: var(–muted);
+color: #6060a0;
 letter-spacing: 2px;
 margin-top: 8px;
-text-transform: uppercase;
 }
 
 .month-badge {
 display: inline-block;
 margin-top: 16px;
-background: var(–card);
-border: 1px solid var(–border);
+background-color: #1a1a28;
+border: 1px solid #2a2a40;
 border-radius: 999px;
 padding: 6px 20px;
 font-size: 14px;
 font-weight: 500;
-color: var(–neon);
+color: #00f5a0;
 letter-spacing: 1px;
 }
 
-/* SECTIONS */
 .section-title {
-font-family: ‘Black Han Sans’, sans-serif;
-font-size: 13px;
+font-family: ‘Black Han Sans’, ‘Noto Sans KR’, sans-serif;
+font-size: 12px;
 letter-spacing: 4px;
 text-transform: uppercase;
-color: var(–muted);
+color: #6060a0;
 margin-bottom: 16px;
 display: flex;
 align-items: center;
@@ -118,13 +98,48 @@ gap: 10px;
 content: ‘’;
 flex: 1;
 height: 1px;
-background: var(–border);
+background-color: #2a2a40;
 }
 
-/* INPUT PANEL */
+.stats-row {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 12px;
+margin-bottom: 32px;
+}
+
+.stat-card {
+background-color: #1a1a28;
+border: 1px solid #2a2a40;
+border-radius: 12px;
+padding: 16px 20px;
+text-align: center;
+}
+
+.stat-val {
+font-family: ‘Bebas Neue’, Impact, ‘Arial Black’, sans-serif;
+font-size: 36px;
+color: #f0f0f8;
+line-height: 1;
+}
+
+.stat-val .unit {
+font-size: 16px;
+color: #6060a0;
+font-family: ‘Noto Sans KR’, sans-serif;
+}
+
+.stat-label {
+font-size: 10px;
+color: #6060a0;
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-top: 4px;
+}
+
 .input-panel {
-background: var(–card);
-border: 1px solid var(–border);
+background-color: #1a1a28;
+border: 1px solid #2a2a40;
 border-radius: 16px;
 padding: 24px;
 margin-bottom: 32px;
@@ -137,7 +152,7 @@ content: ‘’;
 position: absolute;
 top: 0; left: 0; right: 0;
 height: 2px;
-background: linear-gradient(90deg, var(–accent), var(–accent2));
+background: linear-gradient(90deg, #ff4d1c, #ff8c42);
 }
 
 .input-grid {
@@ -145,15 +160,6 @@ display: grid;
 grid-template-columns: 1fr 1fr 130px auto;
 gap: 12px;
 align-items: end;
-}
-
-@media (max-width: 600px) {
-.input-grid {
-grid-template-columns: 1fr 1fr;
-}
-.input-grid .btn-add {
-grid-column: 1 / -1;
-}
 }
 
 .input-group {
@@ -164,55 +170,55 @@ gap: 6px;
 
 .input-group label {
 font-size: 11px;
-color: var(–muted);
+color: #6060a0;
 letter-spacing: 2px;
 text-transform: uppercase;
 font-weight: 500;
 }
 
 select, input[type=“number”], input[type=“date”] {
-background: var(–track);
-border: 1px solid var(–border);
+background-color: #1e1e30;
+border: 1px solid #2a2a40;
 border-radius: 8px;
-color: var(–text);
+color: #f0f0f8;
 padding: 10px 14px;
 font-size: 14px;
 font-family: ‘Noto Sans KR’, sans-serif;
 outline: none;
-transition: border-color 0.2s;
 width: 100%;
 }
 
-select:focus, input:focus {
-border-color: var(–accent);
+select {
+-webkit-appearance: none;
+appearance: none;
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘8’ viewBox=‘0 0 12 8’%3E%3Cpath fill=’%236060a0’ d=‘M6 8L0 0h12z’/%3E%3C/svg%3E”);
+background-repeat: no-repeat;
+background-position: right 12px center;
+padding-right: 32px;
 }
 
-select option { background: var(–surface); }
+select option { background-color: #12121a; color: #f0f0f8; }
+select:focus, input:focus { border-color: #ff4d1c; }
 
 .btn-add {
-background: linear-gradient(135deg, var(–accent), var(–accent2));
+background: linear-gradient(135deg, #ff4d1c, #ff8c42);
 border: none;
 border-radius: 8px;
 color: white;
 font-size: 14px;
 font-weight: 700;
 letter-spacing: 1px;
-padding: 10px 22px;
+padding: 11px 22px;
 cursor: pointer;
-transition: all 0.2s;
 white-space: nowrap;
 font-family: ‘Noto Sans KR’, sans-serif;
 }
-.btn-add:hover {
-transform: translateY(-1px);
-box-shadow: 0 4px 16px rgba(255,77,28,0.4);
-}
-.btn-add:active { transform: translateY(0); }
+.btn-add:hover { opacity: 0.9; }
+.btn-add:active { opacity: 0.8; }
 
-/* GOAL PANEL */
 .goal-panel {
-background: var(–card);
-border: 1px solid var(–border);
+background-color: #1a1a28;
+border: 1px solid #2a2a40;
 border-radius: 16px;
 padding: 24px;
 margin-bottom: 32px;
@@ -220,31 +226,16 @@ margin-bottom: 32px;
 
 .goal-grid {
 display: grid;
-grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+grid-template-columns: repeat(5, 1fr);
 gap: 12px;
 margin-top: 4px;
 }
 
-.goal-item {
-display: flex;
-flex-direction: column;
-gap: 6px;
-}
+.goal-item { display: flex; flex-direction: column; gap: 6px; }
+.goal-item label { font-size: 12px; color: #6060a0; font-weight: 500; }
 
-.goal-item label {
-font-size: 12px;
-color: var(–muted);
-font-weight: 500;
-}
-
-.goal-input-wrap {
-position: relative;
-}
-
-.goal-input-wrap input {
-padding-right: 32px;
-}
-
+.goal-input-wrap { position: relative; }
+.goal-input-wrap input { padding-right: 32px; }
 .goal-input-wrap::after {
 content: ‘km’;
 position: absolute;
@@ -252,128 +243,67 @@ right: 10px;
 top: 50%;
 transform: translateY(-50%);
 font-size: 11px;
-color: var(–muted);
+color: #6060a0;
 pointer-events: none;
 }
 
-/* LEADERBOARD */
-.runners-list {
-display: flex;
-flex-direction: column;
-gap: 14px;
-}
+.runners-list { display: flex; flex-direction: column; gap: 14px; }
 
 .runner-card {
-background: var(–card);
-border: 1px solid var(–border);
+background-color: #1a1a28;
+border: 1px solid #2a2a40;
 border-radius: 14px;
 padding: 18px 22px;
 position: relative;
 overflow: hidden;
-transition: border-color 0.3s, transform 0.2s;
 }
 
-.runner-card:hover {
-border-color: rgba(255,77,28,0.3);
-transform: translateX(3px);
-}
+.runner-card.rank-1 { border-color: rgba(255,215,0,0.35); background: linear-gradient(135deg, #1a1a28 0%, #1f1a10 100%); }
+.runner-card.rank-2 { border-color: rgba(192,192,192,0.2); }
+.runner-card.rank-3 { border-color: rgba(205,127,50,0.2); }
 
-.runner-card.rank-1 {
-border-color: rgba(255,215,0,0.3);
-background: linear-gradient(135deg, #1a1a28 0%, #1f1a10 100%);
-}
-.runner-card.rank-1::before {
-content: ‘’;
-position: absolute;
-inset: 0;
-background: linear-gradient(135deg, rgba(255,215,0,0.04), transparent);
-pointer-events: none;
-}
-
-.runner-top {
-display: flex;
-align-items: center;
-gap: 14px;
-margin-bottom: 12px;
-}
+.runner-top { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
 
 .rank-num {
-font-family: ‘Bebas Neue’, cursive;
+font-family: ‘Bebas Neue’, Impact, sans-serif;
 font-size: 28px;
-color: var(–border);
+color: #2a2a40;
 width: 32px;
 text-align: center;
 line-height: 1;
 flex-shrink: 0;
 }
-
 .rank-1 .rank-num { color: #ffd700; }
 .rank-2 .rank-num { color: #c0c0c0; }
 .rank-3 .rank-num { color: #cd7f32; }
 
 .runner-avatar {
-width: 40px;
-height: 40px;
+width: 40px; height: 40px;
 border-radius: 50%;
-background: var(–track);
-border: 2px solid var(–border);
-display: flex;
-align-items: center;
-justify-content: center;
+background-color: #1e1e30;
+border: 2px solid #2a2a40;
+display: flex; align-items: center; justify-content: center;
 font-size: 18px;
 flex-shrink: 0;
 }
 
-.runner-info {
-flex: 1;
-}
+.runner-info { flex: 1; min-width: 0; }
+.runner-name { font-weight: 700; font-size: 16px; }
+.runner-meta { font-size: 11px; color: #6060a0; margin-top: 2px; }
 
-.runner-name {
-font-weight: 700;
-font-size: 16px;
-letter-spacing: 0.5px;
-}
-
-.runner-meta {
-font-size: 11px;
-color: var(–muted);
-margin-top: 2px;
-}
-
-.runner-km {
-text-align: right;
-flex-shrink: 0;
-}
-
+.runner-km { text-align: right; flex-shrink: 0; }
 .km-value {
-font-family: ‘Bebas Neue’, cursive;
+font-family: ‘Bebas Neue’, Impact, sans-serif;
 font-size: 32px;
-color: var(–accent2);
+color: #ff8c42;
 line-height: 1;
 }
+.km-label { font-size: 11px; color: #6060a0; letter-spacing: 1px; }
 
-.km-label {
-font-size: 11px;
-color: var(–muted);
-letter-spacing: 1px;
-}
-
-/* TRACK BAR */
-.track-wrap {
-position: relative;
-}
-
-.track-labels {
-display: flex;
-justify-content: space-between;
-font-size: 10px;
-color: var(–muted);
-margin-bottom: 4px;
-letter-spacing: 1px;
-}
+.track-labels { display: flex; justify-content: space-between; font-size: 10px; color: #6060a0; margin-bottom: 4px; }
 
 .track-bar {
-background: var(–track);
+background-color: #1e1e30;
 border-radius: 999px;
 height: 20px;
 position: relative;
@@ -383,173 +313,89 @@ overflow: visible;
 .track-fill {
 height: 100%;
 border-radius: 999px;
-background: linear-gradient(90deg, var(–accent), var(–accent2));
+background: linear-gradient(90deg, #ff4d1c, #ff8c42);
 position: relative;
-transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-min-width: 0%;
-max-width: 100%;
+min-width: 2px;
+transition: width 0.8s ease;
 }
 
-.track-fill.done {
-background: linear-gradient(90deg, var(–neon), #00c87a);
-}
+.track-fill.done { background: linear-gradient(90deg, #00f5a0, #00c87a); }
 
 .runner-icon {
 position: absolute;
 right: -16px;
 top: 50%;
-transform: translateY(-50%);
+transform: translateY(-60%);
 font-size: 22px;
-filter: drop-shadow(0 0 6px rgba(255,140,66,0.7));
-animation: bounce 0.6s ease-in-out infinite alternate;
+animation: iconbounce 0.6s ease-in-out infinite alternate;
 z-index: 2;
-pointer-events: none;
 }
 
-.track-fill.done .runner-icon {
-filter: drop-shadow(0 0 8px rgba(0,245,160,0.8));
+@keyframes iconbounce {
+from { transform: translateY(-65%); }
+to   { transform: translateY(-35%); }
 }
 
-@keyframes bounce {
-from { transform: translateY(-60%); }
-to   { transform: translateY(-40%); }
-}
+.pct-text { font-size: 11px; color: #6060a0; margin-top: 6px; text-align: right; }
+.pct-text strong { color: #ff8c42; }
+.pct-text.done strong { color: #00f5a0; }
 
-.pct-text {
-font-size: 11px;
-color: var(–muted);
-margin-top: 6px;
-text-align: right;
-}
-
-.pct-text strong {
-color: var(–accent2);
-font-weight: 700;
-}
-
-.pct-text.done strong { color: var(–neon); }
-
-/* LOG TABLE */
 .log-section {
-background: var(–card);
-border: 1px solid var(–border);
+background-color: #1a1a28;
+border: 1px solid #2a2a40;
 border-radius: 16px;
 padding: 20px 24px;
 margin-top: 32px;
 }
 
-.log-table {
-width: 100%;
-border-collapse: collapse;
-font-size: 13px;
-margin-top: 8px;
-}
-
+.log-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }
 .log-table th {
-color: var(–muted);
-font-weight: 500;
-letter-spacing: 2px;
-font-size: 10px;
-text-transform: uppercase;
-text-align: left;
-padding: 8px 4px;
-border-bottom: 1px solid var(–border);
+color: #6060a0; font-weight: 500; letter-spacing: 2px; font-size: 10px;
+text-transform: uppercase; text-align: left; padding: 8px 6px;
+border-bottom: 1px solid #2a2a40;
 }
-
-.log-table td {
-padding: 9px 4px;
-border-bottom: 1px solid rgba(42,42,64,0.5);
-color: var(–text);
-}
-
+.log-table td { padding: 9px 6px; border-bottom: 1px solid rgba(42,42,64,0.5); color: #f0f0f8; }
 .log-table tr:last-child td { border-bottom: none; }
 
-.log-table .del-btn {
-background: none;
-border: none;
-color: var(–muted);
-cursor: pointer;
-font-size: 14px;
-padding: 2px 6px;
+.del-btn {
+background: none; border: none; color: #6060a0;
+cursor: pointer; font-size: 14px; padding: 2px 8px;
 border-radius: 4px;
-transition: color 0.2s, background 0.2s;
 }
+.del-btn:hover { color: #ff4d1c; background-color: rgba(255,77,28,0.12); }
 
-.log-table .del-btn:hover {
-color: var(–accent);
-background: rgba(255,77,28,0.1);
-}
+.empty-msg { text-align: center; color: #6060a0; padding: 20px; font-size: 13px; }
 
-.empty-msg {
-text-align: center;
-color: var(–muted);
-padding: 20px;
-font-size: 13px;
-}
-
-/* TOAST */
 .toast {
 position: fixed;
-bottom: 32px;
-right: 32px;
-background: var(–neon);
+bottom: 32px; right: 32px;
+background-color: #00f5a0;
 color: #0a0a0f;
 padding: 12px 22px;
 border-radius: 8px;
-font-weight: 700;
-font-size: 14px;
-z-index: 999;
-transform: translateY(80px);
-opacity: 0;
-transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+font-weight: 700; font-size: 14px;
+z-index: 9999;
+transform: translateY(80px); opacity: 0;
+transition: transform 0.35s ease, opacity 0.35s ease;
 pointer-events: none;
 }
-.toast.show {
-transform: translateY(0);
-opacity: 1;
+.toast.show { transform: translateY(0); opacity: 1; }
+
+@media (max-width: 640px) {
+.input-grid { grid-template-columns: 1fr 1fr; }
+.btn-add { grid-column: 1 / -1; }
+.goal-grid { grid-template-columns: repeat(3, 1fr); }
+.stat-val { font-size: 26px; }
+.runner-card { padding: 14px 16px; }
+}
+@media (max-width: 400px) {
+.goal-grid { grid-template-columns: repeat(2, 1fr); }
+.stats-row { gap: 8px; }
 }
 
-/* STATS ROW */
-.stats-row {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 12px;
-margin-bottom: 32px;
-}
-
-.stat-card {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 16px 20px;
-text-align: center;
-}
-
-.stat-val {
-font-family: ‘Bebas Neue’, cursive;
-font-size: 36px;
-color: var(–text);
-line-height: 1;
-}
-
-.stat-val span {
-font-size: 16px;
-color: var(–muted);
-font-family: ‘Noto Sans KR’, sans-serif;
-}
-
-.stat-label {
-font-size: 10px;
-color: var(–muted);
-letter-spacing: 2px;
-text-transform: uppercase;
-margin-top: 4px;
-}
-
-/* scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(–bg); }
-::-webkit-scrollbar-thumb { background: var(–border); border-radius: 3px; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0f; }
+::-webkit-scrollbar-thumb { background: #2a2a40; border-radius: 3px; }
 </style>
 
 </head>
@@ -557,33 +403,27 @@ margin-top: 4px;
 
 <div class="container">
 
-  <!-- HEADER -->
-
   <header>
     <div class="badge">UNIST · ME Dept</div>
-    <h1>RUNNING<span>CREW</span></h1>
-    <p class="subtitle">기계공학과 러닝크루 · 나를 이겨라 챌린지</p>
+    <h1>RUNNING<span class="accent">CREW</span></h1>
+    <p class="subtitle">기계공학과 러닝크루 &nbsp;·&nbsp; 나를 이겨라 챌린지</p>
     <div class="month-badge" id="monthBadge"></div>
   </header>
 
-  <!-- STATS ROW -->
-
   <div class="stats-row">
     <div class="stat-card">
-      <div class="stat-val" id="totalKm">0<span>km</span></div>
+      <div class="stat-val" id="totalKm">0<span class="unit">km</span></div>
       <div class="stat-label">이번 달 총합</div>
     </div>
     <div class="stat-card">
-      <div class="stat-val" id="totalSessions">0<span>회</span></div>
+      <div class="stat-val" id="totalSessions">0<span class="unit">회</span></div>
       <div class="stat-label">총 러닝 횟수</div>
     </div>
     <div class="stat-card">
-      <div class="stat-val" id="avgKm">0<span>km</span></div>
+      <div class="stat-val" id="avgKm">0<span class="unit">km</span></div>
       <div class="stat-label">1인 평균</div>
     </div>
   </div>
-
-  <!-- INPUT PANEL -->
 
   <div class="section-title">기록 입력</div>
   <div class="input-panel">
@@ -591,7 +431,7 @@ margin-top: 4px;
       <div class="input-group">
         <label>이름</label>
         <select id="selName">
-          <option value="">선택</option>
+          <option value="">선택하세요</option>
           <option>김태성</option>
           <option>박영빈</option>
           <option>지우석</option>
@@ -611,29 +451,20 @@ margin-top: 4px;
     </div>
   </div>
 
-  <!-- GOAL PANEL -->
-
-  <div class="section-title">이번 달 목표 (나를 이겨라 챌린지)</div>
+  <div class="section-title">이번 달 목표 &nbsp;·&nbsp; 나를 이겨라 챌린지</div>
   <div class="goal-panel">
     <div class="goal-grid" id="goalGrid"></div>
   </div>
 
-  <!-- LEADERBOARD -->
-
-  <div class="section-title">랭킹 & 진행도</div>
+  <div class="section-title">랭킹 &amp; 진행도</div>
   <div class="runners-list" id="runnersList"></div>
-
-  <!-- LOG -->
 
   <div class="log-section">
     <div class="section-title" style="margin-bottom:0">기록 로그</div>
     <table class="log-table">
       <thead>
         <tr>
-          <th>날짜</th>
-          <th>이름</th>
-          <th>거리</th>
-          <th></th>
+          <th>날짜</th><th>이름</th><th>거리</th><th></th>
         </tr>
       </thead>
       <tbody id="logBody">
@@ -647,155 +478,155 @@ margin-top: 4px;
 <div class="toast" id="toast"></div>
 
 <script>
-const NAMES = ['김태성', '박영빈', '지우석', '이강수', '정임두'];
-const EMOJIS = ['🏃','🦅','⚡','🔥','🌪️'];
+(function() {
+  var NAMES  = ['김태성','박영빈','지우석','이강수','정임두'];
+  var EMOJIS = ['🏃','🦅','⚡','🔥','🌪️'];
+  var records, goals;
 
-let records = JSON.parse(localStorage.getItem('runcrew_records') || '[]');
-let goals   = JSON.parse(localStorage.getItem('runcrew_goals')   || '{}');
+  try { records = JSON.parse(localStorage.getItem('rc2_records') || '[]'); } catch(e) { records = []; }
+  try { goals   = JSON.parse(localStorage.getItem('rc2_goals')   || '{}'); } catch(e) { goals = {}; }
+  NAMES.forEach(function(n) { if (!goals[n]) goals[n] = 50; });
 
-// Init defaults
-NAMES.forEach(n => { if (!goals[n]) goals[n] = 50; });
+  var now = new Date();
+  document.getElementById('monthBadge').textContent =
+    now.getFullYear() + '년 ' + (now.getMonth()+1) + '월';
 
-// Month badge
-const now = new Date();
-document.getElementById('monthBadge').textContent =
-  `${now.getFullYear()}년 ${now.getMonth()+1}월`;
+  var y = now.getFullYear();
+  var m = String(now.getMonth()+1).padStart(2,'0');
+  var d = String(now.getDate()).padStart(2,'0');
+  document.getElementById('inpDate').value = y + '-' + m + '-' + d;
 
-// Default date
-document.getElementById('inpDate').valueAsDate = new Date();
-
-// Build goal inputs
-function buildGoalGrid() {
-  const grid = document.getElementById('goalGrid');
-  grid.innerHTML = '';
-  NAMES.forEach(name => {
-    const div = document.createElement('div');
-    div.className = 'goal-item';
-    div.innerHTML = `
-      <label>${name}</label>
-      <div class="goal-input-wrap">
-        <input type="number" min="0" step="1" value="${goals[name]||50}"
-          oninput="updateGoal('${name}', this.value)">
-      </div>`;
-    grid.appendChild(div);
-  });
-}
-
-function updateGoal(name, val) {
-  goals[name] = parseFloat(val) || 0;
-  localStorage.setItem('runcrew_goals', JSON.stringify(goals));
-  render();
-}
-
-function addRecord() {
-  const name = document.getElementById('selName').value;
-  const km   = parseFloat(document.getElementById('inpKm').value);
-  const date = document.getElementById('inpDate').value;
-
-  if (!name) return showToast('이름을 선택해주세요!');
-  if (!km || km <= 0) return showToast('거리를 입력해주세요!');
-  if (!date) return showToast('날짜를 선택해주세요!');
-
-  records.push({ id: Date.now(), name, km, date });
-  localStorage.setItem('runcrew_records', JSON.stringify(records));
-  document.getElementById('inpKm').value = '';
-  render();
-  showToast(`${name} +${km}km 추가! 🔥`);
-}
-
-function deleteRecord(id) {
-  records = records.filter(r => r.id !== id);
-  localStorage.setItem('runcrew_records', JSON.stringify(records));
-  render();
-}
-
-function getTotals() {
-  const t = {};
-  NAMES.forEach(n => t[n] = 0);
-  records.forEach(r => { if (t[r.name] !== undefined) t[r.name] += r.km; });
-  return t;
-}
-
-function render() {
-  const totals = getTotals();
-  const sorted = [...NAMES].sort((a,b) => totals[b] - totals[a]);
-
-  // Stats
-  const allKm = Object.values(totals).reduce((a,b)=>a+b,0);
-  document.getElementById('totalKm').innerHTML = `${allKm.toFixed(1)}<span>km</span>`;
-  document.getElementById('totalSessions').innerHTML = `${records.length}<span>회</span>`;
-  document.getElementById('avgKm').innerHTML = `${(allKm/NAMES.length).toFixed(1)}<span>km</span>`;
-
-  // Runners list
-  const list = document.getElementById('runnersList');
-  list.innerHTML = '';
-  sorted.forEach((name, idx) => {
-    const km   = totals[name];
-    const goal = goals[name] || 50;
-    const pct  = Math.min(100, goal > 0 ? (km / goal * 100) : 0);
-    const done = pct >= 100;
-    const emojiIdx = NAMES.indexOf(name);
-
-    const card = document.createElement('div');
-    card.className = `runner-card rank-${idx+1}`;
-
-    let pctMsg = done
-      ? `🎉 목표 달성! ${km.toFixed(1)} / ${goal} km`
-      : `${km.toFixed(1)} / ${goal} km · ${pct.toFixed(1)}% 달성`;
-
-    card.innerHTML = `
-      <div class="runner-top">
-        <div class="rank-num">${idx+1}</div>
-        <div class="runner-avatar">${EMOJIS[emojiIdx]}</div>
-        <div class="runner-info">
-          <div class="runner-name">${name}</div>
-          <div class="runner-meta">목표: ${goal} km</div>
-        </div>
-        <div class="runner-km">
-          <div class="km-value">${km.toFixed(1)}</div>
-          <div class="km-label">KM</div>
-        </div>
-      </div>
-      <div class="track-wrap">
-        <div class="track-labels">
-          <span>0 km</span>
-          <span>${goal} km</span>
-        </div>
-        <div class="track-bar">
-          <div class="track-fill ${done?'done':''}" style="width:${pct}%">
-            <div class="runner-icon">${done?'🏅':'🏃'}</div>
-          </div>
-        </div>
-        <div class="pct-text ${done?'done':''}"><strong>${pct.toFixed(1)}%</strong> · ${pctMsg}</div>
-      </div>`;
-    list.appendChild(card);
-  });
-
-  // Log table
-  const tbody = document.getElementById('logBody');
-  const sorted_records = [...records].sort((a,b) => b.date.localeCompare(a.date));
-  if (sorted_records.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="4" class="empty-msg">아직 기록이 없습니다 🏃</td></tr>';
-  } else {
-    tbody.innerHTML = sorted_records.map(r => `
-      <tr>
-        <td>${r.date}</td>
-        <td>${r.name}</td>
-        <td><strong>${r.km.toFixed(2)} km</strong></td>
-        <td><button class="del-btn" onclick="deleteRecord(${r.id})">✕</button></td>
-      </tr>`).join('');
+  function save() {
+    try {
+      localStorage.setItem('rc2_records', JSON.stringify(records));
+      localStorage.setItem('rc2_goals',   JSON.stringify(goals));
+    } catch(e) {}
   }
-}
 
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
-}
+  function buildGoalGrid() {
+    var g = document.getElementById('goalGrid');
+    g.innerHTML = '';
+    NAMES.forEach(function(name) {
+      var div = document.createElement('div');
+      div.className = 'goal-item';
+      div.innerHTML =
+        '<label>' + name + '</label>'
+        + '<div class="goal-input-wrap">'
+        + '<input type="number" min="0" step="1" value="' + (goals[name]||50) + '" '
+        + 'oninput="window._ug(\'' + name + '\',this.value)">'
+        + '</div>';
+      g.appendChild(div);
+    });
+  }
 
-buildGoalGrid();
-render();
+  window._ug = function(name, val) {
+    goals[name] = parseFloat(val) || 0;
+    save();
+    render();
+  };
+
+  window.addRecord = function() {
+    var name = document.getElementById('selName').value;
+    var km   = parseFloat(document.getElementById('inpKm').value);
+    var date = document.getElementById('inpDate').value;
+    if (!name) { showToast('이름을 선택해주세요!'); return; }
+    if (!km || km <= 0) { showToast('거리를 입력해주세요!'); return; }
+    if (!date) { showToast('날짜를 선택해주세요!'); return; }
+    records.push({ id: Date.now(), name: name, km: km, date: date });
+    save();
+    document.getElementById('inpKm').value = '';
+    render();
+    showToast(name + ' +' + km + 'km 추가! 🔥');
+  };
+
+  window.deleteRecord = function(id) {
+    records = records.filter(function(r) { return r.id !== id; });
+    save();
+    render();
+  };
+
+  function getTotals() {
+    var t = {};
+    NAMES.forEach(function(n) { t[n] = 0; });
+    records.forEach(function(r) { if (t[r.name] !== undefined) t[r.name] += r.km; });
+    return t;
+  }
+
+  function render() {
+    var totals = getTotals();
+    var sorted = NAMES.slice().sort(function(a,b) { return totals[b]-totals[a]; });
+    var allKm  = NAMES.reduce(function(s,n) { return s + totals[n]; }, 0);
+
+    document.getElementById('totalKm').innerHTML       = allKm.toFixed(1) + '<span class="unit">km</span>';
+    document.getElementById('totalSessions').innerHTML = records.length   + '<span class="unit">회</span>';
+    document.getElementById('avgKm').innerHTML         = (allKm/NAMES.length).toFixed(1) + '<span class="unit">km</span>';
+
+    var list = document.getElementById('runnersList');
+    list.innerHTML = '';
+
+    sorted.forEach(function(name, idx) {
+      var km   = totals[name];
+      var goal = goals[name] || 50;
+      var pct  = goal > 0 ? Math.min(100, km/goal*100) : 0;
+      var done = pct >= 100;
+      var ei   = NAMES.indexOf(name);
+      var msg  = done
+        ? '🎉 목표 달성! ' + km.toFixed(1) + ' / ' + goal + ' km'
+        : km.toFixed(1) + ' / ' + goal + ' km · ' + pct.toFixed(1) + '% 달성';
+
+      var card = document.createElement('div');
+      card.className = 'runner-card rank-' + (idx+1);
+      card.innerHTML =
+        '<div class="runner-top">'
+          + '<div class="rank-num">'+(idx+1)+'</div>'
+          + '<div class="runner-avatar">'+EMOJIS[ei]+'</div>'
+          + '<div class="runner-info">'
+            + '<div class="runner-name">'+name+'</div>'
+            + '<div class="runner-meta">목표: '+goal+' km</div>'
+          + '</div>'
+          + '<div class="runner-km">'
+            + '<div class="km-value">'+km.toFixed(1)+'</div>'
+            + '<div class="km-label">KM</div>'
+          + '</div>'
+        + '</div>'
+        + '<div>'
+          + '<div class="track-labels"><span>0 km</span><span>'+goal+' km</span></div>'
+          + '<div class="track-bar">'
+            + '<div class="track-fill'+(done?' done':'')+'" style="width:'+Math.max(pct,0.5)+'%">'
+              + '<div class="runner-icon">'+(done?'🏅':'🏃')+'</div>'
+            + '</div>'
+          + '</div>'
+          + '<div class="pct-text'+(done?' done':'')+'"><strong>'+pct.toFixed(1)+'%</strong> · '+msg+'</div>'
+        + '</div>';
+      list.appendChild(card);
+    });
+
+    var tbody = document.getElementById('logBody');
+    var sr = records.slice().sort(function(a,b) { return b.date > a.date ? 1 : -1; });
+    if (!sr.length) {
+      tbody.innerHTML = '<tr><td colspan="4" class="empty-msg">아직 기록이 없습니다 🏃</td></tr>';
+    } else {
+      tbody.innerHTML = sr.map(function(r) {
+        return '<tr>'
+          + '<td>'+r.date+'</td>'
+          + '<td>'+r.name+'</td>'
+          + '<td><strong>'+r.km.toFixed(2)+' km</strong></td>'
+          + '<td><button class="del-btn" onclick="deleteRecord('+r.id+')">✕</button></td>'
+          + '</tr>';
+      }).join('');
+    }
+  }
+
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 2400);
+  }
+
+  buildGoalGrid();
+  render();
+})();
 </script>
 
 </body>
