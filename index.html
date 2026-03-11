@@ -8,453 +8,169 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<!-- Firebase v9 compat (안정된 버전) -->
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 html, body {
-background-color: #0a0a0f !important;
-color: #f0f0f8;
-font-family: ‘Noto Sans KR’, ‘Apple SD Gothic Neo’, ‘Malgun Gothic’, sans-serif;
-min-height: 100vh;
-overflow-x: hidden;
+  background-color: #0a0a0f !important;
+  color: #f0f0f8;
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
-
 body::before {
-content: ‘’;
-position: fixed;
-inset: 0;
-background:
-radial-gradient(ellipse 60% 40% at 20% 10%, rgba(255,77,28,0.08) 0%, transparent 60%),
-radial-gradient(ellipse 50% 50% at 80% 90%, rgba(0,245,160,0.06) 0%, transparent 60%);
-pointer-events: none;
-z-index: 0;
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 10%, rgba(255,77,28,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 80% 90%, rgba(0,245,160,0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
 }
-
-.container {
-max-width: 860px;
-margin: 0 auto;
-padding: 32px 20px 60px;
-position: relative;
-z-index: 1;
-}
-
+.container { max-width: 860px; margin: 0 auto; padding: 32px 20px 60px; position: relative; z-index: 1; }
 header { text-align: center; margin-bottom: 40px; }
-
-.badge {
-display: inline-block;
-background-color: #ff4d1c;
-color: white;
-font-size: 11px;
-font-weight: 700;
-letter-spacing: 3px;
-padding: 4px 14px;
-border-radius: 2px;
-text-transform: uppercase;
-margin-bottom: 12px;
-}
-
-header h1 {
-font-family: ‘Bebas Neue’, ‘Black Han Sans’, Impact, ‘Arial Black’, sans-serif;
-font-size: clamp(42px, 8vw, 72px);
-letter-spacing: 4px;
-line-height: 1;
-color: #f0f0f8;
-}
-
+.badge { display: inline-block; background-color: #ff4d1c; color: white; font-size: 11px; font-weight: 700; letter-spacing: 3px; padding: 4px 14px; border-radius: 2px; text-transform: uppercase; margin-bottom: 12px; }
+header h1 { font-family: 'Bebas Neue', 'Black Han Sans', Impact, 'Arial Black', sans-serif; font-size: clamp(42px, 8vw, 72px); letter-spacing: 4px; line-height: 1; color: #f0f0f8; }
 header h1 .accent { color: #ff4d1c; }
-
-.subtitle {
-font-size: 13px;
-color: #6060a0;
-letter-spacing: 2px;
-margin-top: 8px;
-}
-
-.month-badge {
-display: inline-block;
-margin-top: 16px;
-background-color: #1a1a28;
-border: 1px solid #2a2a40;
-border-radius: 999px;
-padding: 6px 20px;
-font-size: 14px;
-font-weight: 500;
-color: #00f5a0;
-letter-spacing: 1px;
-}
-
-.section-title {
-font-family: ‘Black Han Sans’, ‘Noto Sans KR’, sans-serif;
-font-size: 12px;
-letter-spacing: 4px;
-text-transform: uppercase;
-color: #6060a0;
-margin-bottom: 16px;
-display: flex;
-align-items: center;
-gap: 10px;
-}
-.section-title::after {
-content: ‘’;
-flex: 1;
-height: 1px;
-background-color: #2a2a40;
-}
-
-.stats-row {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 12px;
-margin-bottom: 32px;
-}
-
-.stat-card {
-background-color: #1a1a28;
-border: 1px solid #2a2a40;
-border-radius: 12px;
-padding: 16px 20px;
-text-align: center;
-}
-
-.stat-val {
-font-family: ‘Bebas Neue’, Impact, ‘Arial Black’, sans-serif;
-font-size: 36px;
-color: #f0f0f8;
-line-height: 1;
-}
-
-.stat-val .unit {
-font-size: 16px;
-color: #6060a0;
-font-family: ‘Noto Sans KR’, sans-serif;
-}
-
-.stat-label {
-font-size: 10px;
-color: #6060a0;
-letter-spacing: 2px;
-text-transform: uppercase;
-margin-top: 4px;
-}
-
-.input-panel {
-background-color: #1a1a28;
-border: 1px solid #2a2a40;
-border-radius: 16px;
-padding: 24px;
-margin-bottom: 32px;
-position: relative;
-overflow: hidden;
-}
-
-.input-panel::before {
-content: ‘’;
-position: absolute;
-top: 0; left: 0; right: 0;
-height: 2px;
-background: linear-gradient(90deg, #ff4d1c, #ff8c42);
-}
-
-.input-grid {
-display: grid;
-grid-template-columns: 1fr 1fr 130px auto;
-gap: 12px;
-align-items: end;
-}
-
-.input-group {
-display: flex;
-flex-direction: column;
-gap: 6px;
-}
-
-.input-group label {
-font-size: 11px;
-color: #6060a0;
-letter-spacing: 2px;
-text-transform: uppercase;
-font-weight: 500;
-}
-
-select, input[type=“number”], input[type=“date”] {
-background-color: #1e1e30;
-border: 1px solid #2a2a40;
-border-radius: 8px;
-color: #f0f0f8;
-padding: 10px 14px;
-font-size: 14px;
-font-family: ‘Noto Sans KR’, sans-serif;
-outline: none;
-width: 100%;
-}
-
-select {
--webkit-appearance: none;
-appearance: none;
-background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘8’ viewBox=‘0 0 12 8’%3E%3Cpath fill=’%236060a0’ d=‘M6 8L0 0h12z’/%3E%3C/svg%3E”);
-background-repeat: no-repeat;
-background-position: right 12px center;
-padding-right: 32px;
-}
-
+.subtitle { font-size: 13px; color: #6060a0; letter-spacing: 2px; margin-top: 8px; }
+.month-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 16px; }
+.month-btn { background: none; border: 1px solid #2a2a40; border-radius: 8px; color: #6060a0; font-size: 18px; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.month-btn:hover { border-color: #ff4d1c; color: #ff4d1c; }
+.month-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.month-badge { background-color: #1a1a28; border: 1px solid #2a2a40; border-radius: 999px; padding: 6px 20px; font-size: 14px; font-weight: 500; color: #00f5a0; letter-spacing: 1px; min-width: 130px; text-align: center; }
+.month-badge.past { color: #6060a0; }
+.section-title { font-family: 'Black Han Sans', 'Noto Sans KR', sans-serif; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: #6060a0; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background-color: #2a2a40; }
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
+.stat-card { background-color: #1a1a28; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px 20px; text-align: center; }
+.stat-val { font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif; font-size: 36px; color: #f0f0f8; line-height: 1; }
+.stat-val .unit { font-size: 16px; color: #6060a0; font-family: 'Noto Sans KR', sans-serif; }
+.stat-label { font-size: 10px; color: #6060a0; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+.input-panel { background-color: #1a1a28; border: 1px solid #2a2a40; border-radius: 16px; padding: 24px; margin-bottom: 32px; position: relative; overflow: hidden; }
+.input-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #ff4d1c, #ff8c42); }
+.input-grid { display: grid; grid-template-columns: 1fr 1fr 130px auto; gap: 12px; align-items: end; }
+.input-group { display: flex; flex-direction: column; gap: 6px; }
+.input-group label { font-size: 11px; color: #6060a0; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
+select, input[type="number"], input[type="date"] { background-color: #1e1e30; border: 1px solid #2a2a40; border-radius: 8px; color: #f0f0f8; padding: 10px 14px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; outline: none; width: 100%; }
+select { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236060a0' d='M6 8L0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
 select option { background-color: #12121a; color: #f0f0f8; }
 select:focus, input:focus { border-color: #ff4d1c; }
-
-.btn-add {
-background: linear-gradient(135deg, #ff4d1c, #ff8c42);
-border: none;
-border-radius: 8px;
-color: white;
-font-size: 14px;
-font-weight: 700;
-letter-spacing: 1px;
-padding: 11px 22px;
-cursor: pointer;
-white-space: nowrap;
-font-family: ‘Noto Sans KR’, sans-serif;
-}
-.btn-add:hover { opacity: 0.9; }
-.btn-add:active { opacity: 0.8; }
-
-.goal-panel {
-background-color: #1a1a28;
-border: 1px solid #2a2a40;
-border-radius: 16px;
-padding: 24px;
-margin-bottom: 32px;
-}
-
-.goal-grid {
-display: grid;
-grid-template-columns: repeat(5, 1fr);
-gap: 12px;
-margin-top: 4px;
-}
-
+.btn-add { background: linear-gradient(135deg, #ff4d1c, #ff8c42); border: none; border-radius: 8px; color: white; font-size: 14px; font-weight: 700; letter-spacing: 1px; padding: 11px 22px; cursor: pointer; white-space: nowrap; font-family: 'Noto Sans KR', sans-serif; }
+.btn-add:hover { opacity: 0.88; }
+.btn-add:disabled { opacity: 0.4; cursor: not-allowed; }
+.goal-panel { background-color: #1a1a28; border: 1px solid #2a2a40; border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+.goal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 4px; }
 .goal-item { display: flex; flex-direction: column; gap: 6px; }
 .goal-item label { font-size: 12px; color: #6060a0; font-weight: 500; }
-
 .goal-input-wrap { position: relative; }
 .goal-input-wrap input { padding-right: 32px; }
-.goal-input-wrap::after {
-content: ‘km’;
-position: absolute;
-right: 10px;
-top: 50%;
-transform: translateY(-50%);
-font-size: 11px;
-color: #6060a0;
-pointer-events: none;
-}
-
+.goal-input-wrap::after { content: 'km'; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 11px; color: #6060a0; pointer-events: none; }
 .runners-list { display: flex; flex-direction: column; gap: 14px; }
-
-.runner-card {
-background-color: #1a1a28;
-border: 1px solid #2a2a40;
-border-radius: 14px;
-padding: 18px 22px;
-position: relative;
-overflow: hidden;
-}
-
+.runner-card { background-color: #1a1a28; border: 1px solid #2a2a40; border-radius: 14px; padding: 18px 22px; position: relative; overflow: hidden; }
 .runner-card.rank-1 { border-color: rgba(255,215,0,0.35); background: linear-gradient(135deg, #1a1a28 0%, #1f1a10 100%); }
 .runner-card.rank-2 { border-color: rgba(192,192,192,0.2); }
 .runner-card.rank-3 { border-color: rgba(205,127,50,0.2); }
-
 .runner-top { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
-
-.rank-num {
-font-family: ‘Bebas Neue’, Impact, sans-serif;
-font-size: 28px;
-color: #2a2a40;
-width: 32px;
-text-align: center;
-line-height: 1;
-flex-shrink: 0;
-}
+.rank-num { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 28px; color: #2a2a40; width: 32px; text-align: center; line-height: 1; flex-shrink: 0; }
 .rank-1 .rank-num { color: #ffd700; }
 .rank-2 .rank-num { color: #c0c0c0; }
 .rank-3 .rank-num { color: #cd7f32; }
-
-.runner-avatar {
-width: 40px; height: 40px;
-border-radius: 50%;
-background-color: #1e1e30;
-border: 2px solid #2a2a40;
-display: flex; align-items: center; justify-content: center;
-font-size: 18px;
-flex-shrink: 0;
-}
-
+.runner-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #1e1e30; border: 2px solid #2a2a40; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
 .runner-info { flex: 1; min-width: 0; }
 .runner-name { font-weight: 700; font-size: 16px; }
 .runner-meta { font-size: 11px; color: #6060a0; margin-top: 2px; }
-
 .runner-km { text-align: right; flex-shrink: 0; }
-.km-value {
-font-family: ‘Bebas Neue’, Impact, sans-serif;
-font-size: 32px;
-color: #ff8c42;
-line-height: 1;
-}
+.km-value { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 32px; color: #ff8c42; line-height: 1; }
 .km-label { font-size: 11px; color: #6060a0; letter-spacing: 1px; }
-
 .track-labels { display: flex; justify-content: space-between; font-size: 10px; color: #6060a0; margin-bottom: 4px; }
-
-.track-bar {
-background-color: #1e1e30;
-border-radius: 999px;
-height: 20px;
-position: relative;
-overflow: visible;
-}
-
-.track-fill {
-height: 100%;
-border-radius: 999px;
-background: linear-gradient(90deg, #ff4d1c, #ff8c42);
-position: relative;
-min-width: 2px;
-transition: width 0.8s ease;
-}
-
+.track-bar { background-color: #1e1e30; border-radius: 999px; height: 20px; position: relative; overflow: visible; }
+.track-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #ff4d1c, #ff8c42); position: relative; min-width: 2px; transition: width 0.8s ease; }
 .track-fill.done { background: linear-gradient(90deg, #00f5a0, #00c87a); }
-
-.runner-icon {
-position: absolute;
-right: -16px;
-top: 50%;
-transform: translateY(-60%);
-font-size: 22px;
-animation: iconbounce 0.6s ease-in-out infinite alternate;
-z-index: 2;
-}
-
-@keyframes iconbounce {
-from { transform: translateY(-65%); }
-to   { transform: translateY(-35%); }
-}
-
+.runner-icon { position: absolute; right: -16px; top: 50%; font-size: 22px; animation: iconbounce 0.6s ease-in-out infinite alternate; z-index: 2; }
+@keyframes iconbounce { from { transform: translateY(-65%); } to { transform: translateY(-35%); } }
 .pct-text { font-size: 11px; color: #6060a0; margin-top: 6px; text-align: right; }
 .pct-text strong { color: #ff8c42; }
 .pct-text.done strong { color: #00f5a0; }
-
-.log-section {
-background-color: #1a1a28;
-border: 1px solid #2a2a40;
-border-radius: 16px;
-padding: 20px 24px;
-margin-top: 32px;
-}
-
+.log-section { background-color: #1a1a28; border: 1px solid #2a2a40; border-radius: 16px; padding: 20px 24px; margin-top: 32px; }
 .log-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }
-.log-table th {
-color: #6060a0; font-weight: 500; letter-spacing: 2px; font-size: 10px;
-text-transform: uppercase; text-align: left; padding: 8px 6px;
-border-bottom: 1px solid #2a2a40;
-}
+.log-table th { color: #6060a0; font-weight: 500; letter-spacing: 2px; font-size: 10px; text-transform: uppercase; text-align: left; padding: 8px 6px; border-bottom: 1px solid #2a2a40; }
 .log-table td { padding: 9px 6px; border-bottom: 1px solid rgba(42,42,64,0.5); color: #f0f0f8; }
 .log-table tr:last-child td { border-bottom: none; }
-
-.del-btn {
-background: none; border: none; color: #6060a0;
-cursor: pointer; font-size: 14px; padding: 2px 8px;
-border-radius: 4px;
-}
+.del-btn { background: none; border: none; color: #6060a0; cursor: pointer; font-size: 14px; padding: 2px 8px; border-radius: 4px; }
 .del-btn:hover { color: #ff4d1c; background-color: rgba(255,77,28,0.12); }
-
 .empty-msg { text-align: center; color: #6060a0; padding: 20px; font-size: 13px; }
-
-.toast {
-position: fixed;
-bottom: 32px; right: 32px;
-background-color: #00f5a0;
-color: #0a0a0f;
-padding: 12px 22px;
-border-radius: 8px;
-font-weight: 700; font-size: 14px;
-z-index: 9999;
-transform: translateY(80px); opacity: 0;
-transition: transform 0.35s ease, opacity 0.35s ease;
-pointer-events: none;
-}
+.loading-overlay { position: fixed; inset: 0; background: rgba(10,10,15,0.9); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999; gap: 16px; }
+.loading-overlay.hidden { display: none; }
+.spinner { width: 40px; height: 40px; border: 3px solid #2a2a40; border-top-color: #ff4d1c; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { color: #6060a0; font-size: 13px; letter-spacing: 2px; }
+.toast { position: fixed; bottom: 32px; right: 32px; background-color: #00f5a0; color: #0a0a0f; padding: 12px 22px; border-radius: 8px; font-weight: 700; font-size: 14px; z-index: 9999; transform: translateY(80px); opacity: 0; transition: transform 0.35s ease, opacity 0.35s ease; pointer-events: none; }
 .toast.show { transform: translateY(0); opacity: 1; }
-
-@media (max-width: 640px) {
-.input-grid { grid-template-columns: 1fr 1fr; }
-.btn-add { grid-column: 1 / -1; }
-.goal-grid { grid-template-columns: repeat(3, 1fr); }
-.stat-val { font-size: 26px; }
-.runner-card { padding: 14px 16px; }
-}
-@media (max-width: 400px) {
-.goal-grid { grid-template-columns: repeat(2, 1fr); }
-.stats-row { gap: 8px; }
-}
-
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0a0a0f; }
-::-webkit-scrollbar-thumb { background: #2a2a40; border-radius: 3px; }
+.toast.error { background-color: #ff4d1c; color: white; }
+@media (max-width: 640px) { .input-grid { grid-template-columns: 1fr 1fr; } .btn-add { grid-column: 1 / -1; } .goal-grid { grid-template-columns: repeat(3, 1fr); } .stat-val { font-size: 26px; } .runner-card { padding: 14px 16px; } }
+@media (max-width: 400px) { .goal-grid { grid-template-columns: repeat(2, 1fr); } .stats-row { gap: 8px; } }
+::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #0a0a0f; } ::-webkit-scrollbar-thumb { background: #2a2a40; border-radius: 3px; }
 </style>
 
 </head>
 <body>
 
-<div class="container">
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">데이터 불러오는 중...</div>
+</div>
 
+<div class="container">
   <header>
     <div class="badge">UNIST · ME Dept</div>
     <h1>RUNNING<span class="accent">CREW</span></h1>
     <p class="subtitle">기계공학과 러닝크루 &nbsp;·&nbsp; 나를 이겨라 챌린지</p>
-    <div class="month-badge" id="monthBadge"></div>
+    <div class="month-nav">
+      <button class="month-btn" id="btnPrev">&#8592;</button>
+      <div class="month-badge" id="monthBadge"></div>
+      <button class="month-btn" id="btnNext" disabled>&#8594;</button>
+    </div>
   </header>
 
   <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-val" id="totalKm">0<span class="unit">km</span></div>
-      <div class="stat-label">이번 달 총합</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-val" id="totalSessions">0<span class="unit">회</span></div>
-      <div class="stat-label">총 러닝 횟수</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-val" id="avgKm">0<span class="unit">km</span></div>
-      <div class="stat-label">1인 평균</div>
-    </div>
+    <div class="stat-card"><div class="stat-val" id="totalKm">0<span class="unit">km</span></div><div class="stat-label">이번 달 총합</div></div>
+    <div class="stat-card"><div class="stat-val" id="totalSessions">0<span class="unit">회</span></div><div class="stat-label">총 러닝 횟수</div></div>
+    <div class="stat-card"><div class="stat-val" id="avgKm">0<span class="unit">km</span></div><div class="stat-label">1인 평균</div></div>
   </div>
 
-  <div class="section-title">기록 입력</div>
-  <div class="input-panel">
-    <div class="input-grid">
-      <div class="input-group">
-        <label>이름</label>
-        <select id="selName">
-          <option value="">선택하세요</option>
-          <option>김태성</option>
-          <option>박영빈</option>
-          <option>지우석</option>
-          <option>이강수</option>
-          <option>정임두</option>
-        </select>
+  <div id="inputSection">
+    <div class="section-title">기록 입력</div>
+    <div class="input-panel">
+      <div class="input-grid">
+        <div class="input-group">
+          <label>이름</label>
+          <select id="selName">
+            <option value="">선택하세요</option>
+            <option>김태성</option><option>박영빈</option><option>지우석</option><option>이강수</option><option>정임두</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>거리 (km)</label>
+          <input type="number" id="inpKm" placeholder="0.0" step="0.01" min="0">
+        </div>
+        <div class="input-group">
+          <label>날짜</label>
+          <input type="date" id="inpDate">
+        </div>
+        <button class="btn-add" id="btnAdd" onclick="addRecord()">+ 추가</button>
       </div>
-      <div class="input-group">
-        <label>거리 (km)</label>
-        <input type="number" id="inpKm" placeholder="0.0" step="0.01" min="0">
-      </div>
-      <div class="input-group">
-        <label>날짜</label>
-        <input type="date" id="inpDate">
-      </div>
-      <button class="btn-add" onclick="addRecord()">+ 추가</button>
     </div>
   </div>
 
   <div class="section-title">이번 달 목표 &nbsp;·&nbsp; 나를 이겨라 챌린지</div>
-  <div class="goal-panel">
-    <div class="goal-grid" id="goalGrid"></div>
-  </div>
+  <div class="goal-panel"><div class="goal-grid" id="goalGrid"></div></div>
 
   <div class="section-title">랭킹 &amp; 진행도</div>
   <div class="runners-list" id="runnersList"></div>
@@ -462,171 +178,202 @@ pointer-events: none;
   <div class="log-section">
     <div class="section-title" style="margin-bottom:0">기록 로그</div>
     <table class="log-table">
-      <thead>
-        <tr>
-          <th>날짜</th><th>이름</th><th>거리</th><th></th>
-        </tr>
-      </thead>
-      <tbody id="logBody">
-        <tr><td colspan="4" class="empty-msg">아직 기록이 없습니다 🏃</td></tr>
-      </tbody>
+      <thead><tr><th>날짜</th><th>이름</th><th>거리</th><th></th></tr></thead>
+      <tbody id="logBody"><tr><td colspan="4" class="empty-msg">불러오는 중... 🏃</td></tr></tbody>
     </table>
   </div>
-
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-(function() {
-  var NAMES  = ['김태성','박영빈','지우석','이강수','정임두'];
-  var EMOJIS = ['🏃','🦅','⚡','🔥','🌪️'];
-  var records, goals;
+var NAMES  = ['김태성','박영빈','지우석','이강수','정임두'];
+var EMOJIS = ['🏃','🦅','⚡','🔥','🌪️'];
 
-  try { records = JSON.parse(localStorage.getItem('rc2_records') || '[]'); } catch(e) { records = []; }
-  try { goals   = JSON.parse(localStorage.getItem('rc2_goals')   || '{}'); } catch(e) { goals = {}; }
-  NAMES.forEach(function(n) { if (!goals[n]) goals[n] = 50; });
+// Firebase 초기화
+var firebaseConfig = {
+  apiKey: "AIzaSyCg9Tm1-iTbww-_tC3r1926nZTu_S5JEOg",
+  authDomain: "unist-me-running-crew.firebaseapp.com",
+  projectId: "unist-me-running-crew",
+  storageBucket: "unist-me-running-crew.firebasestorage.app",
+  messagingSenderId: "316921921704",
+  appId: "1:316921921704:web:fbd984b017b2a6b131429d"
+};
 
-  var now = new Date();
-  document.getElementById('monthBadge').textContent =
-    now.getFullYear() + '년 ' + (now.getMonth()+1) + '월';
+var app = firebase.initializeApp(firebaseConfig);
+var db  = firebase.firestore(app);
 
-  var y = now.getFullYear();
-  var m = String(now.getMonth()+1).padStart(2,'0');
-  var d = String(now.getDate()).padStart(2,'0');
-  document.getElementById('inpDate').value = y + '-' + m + '-' + d;
+var monthOffset = 0;
+var viewYear, viewMonth, isCurrentMonth;
+var records = [], goals = {};
+var unsubRec = null, unsubGoal = null;
 
-  function save() {
-    try {
-      localStorage.setItem('rc2_records', JSON.stringify(records));
-      localStorage.setItem('rc2_goals',   JSON.stringify(goals));
-    } catch(e) {}
+function pad(n) { return String(n).padStart(2,'0'); }
+function monthKey(y, m) { return y + '-' + pad(m); }
+
+function initView() {
+  var d = new Date();
+  d.setDate(1);
+  d.setMonth(d.getMonth() + monthOffset);
+  viewYear  = d.getFullYear();
+  viewMonth = d.getMonth() + 1;
+  isCurrentMonth = (monthOffset === 0);
+
+  var badge = document.getElementById('monthBadge');
+  badge.textContent = viewYear + '년 ' + viewMonth + '월';
+  badge.className = 'month-badge' + (isCurrentMonth ? '' : ' past');
+  document.getElementById('btnNext').disabled = isCurrentMonth;
+  document.getElementById('inputSection').style.display = isCurrentMonth ? '' : 'none';
+
+  if (isCurrentMonth) {
+    var now = new Date();
+    document.getElementById('inpDate').value = now.getFullYear()+'-'+pad(now.getMonth()+1)+'-'+pad(now.getDate());
   }
+  subscribeData();
+}
 
-  function buildGoalGrid() {
-    var g = document.getElementById('goalGrid');
-    g.innerHTML = '';
-    NAMES.forEach(function(name) {
-      var div = document.createElement('div');
-      div.className = 'goal-item';
-      div.innerHTML =
-        '<label>' + name + '</label>'
-        + '<div class="goal-input-wrap">'
-        + '<input type="number" min="0" step="1" value="' + (goals[name]||50) + '" '
-        + 'oninput="window._ug(\'' + name + '\',this.value)">'
-        + '</div>';
-      g.appendChild(div);
-    });
-  }
+function subscribeData() {
+  document.getElementById('loadingOverlay').classList.remove('hidden');
+  if (unsubRec)  { unsubRec();  unsubRec  = null; }
+  if (unsubGoal) { unsubGoal(); unsubGoal = null; }
 
-  window._ug = function(name, val) {
-    goals[name] = parseFloat(val) || 0;
-    save();
+  var mk = monthKey(viewYear, viewMonth);
+
+  unsubGoal = db.collection('goals').doc(mk).onSnapshot(function(snap) {
+    goals = snap.exists ? snap.data() : {};
+    NAMES.forEach(function(n) { if (!goals[n]) goals[n] = 50; });
+    buildGoalGrid();
     render();
-  };
+  }, function(e) { showToast('목표 오류: ' + e.message, true); });
 
-  window.addRecord = function() {
-    var name = document.getElementById('selName').value;
-    var km   = parseFloat(document.getElementById('inpKm').value);
-    var date = document.getElementById('inpDate').value;
-    if (!name) { showToast('이름을 선택해주세요!'); return; }
-    if (!km || km <= 0) { showToast('거리를 입력해주세요!'); return; }
-    if (!date) { showToast('날짜를 선택해주세요!'); return; }
-    records.push({ id: Date.now(), name: name, km: km, date: date });
-    save();
+  unsubRec = db.collection('records_' + mk).onSnapshot(function(snap) {
+    records = [];
+    snap.forEach(function(d) {
+      var x = d.data();
+      records.push({ id: d.id, name: x.name, km: x.km, date: x.date, ts: x.createdAt||0 });
+    });
+    document.getElementById('loadingOverlay').classList.add('hidden');
+    render();
+  }, function(e) {
+    document.getElementById('loadingOverlay').classList.add('hidden');
+    showToast('기록 오류: ' + e.message, true);
+  });
+}
+
+function buildGoalGrid() {
+  var g = document.getElementById('goalGrid');
+  g.innerHTML = '';
+  NAMES.forEach(function(name) {
+    var div = document.createElement('div');
+    div.className = 'goal-item';
+    div.innerHTML = '<label>' + name + '</label>'
+      + '<div class="goal-input-wrap">'
+      + '<input type="number" min="0" step="1" value="' + (goals[name]||50) + '"'
+      + (!isCurrentMonth ? ' disabled' : '')
+      + ' oninput="updateGoal(\'' + name + '\',this.value)">'
+      + '</div>';
+    g.appendChild(div);
+  });
+}
+
+function updateGoal(name, val) {
+  goals[name] = parseFloat(val) || 0;
+  var update = {}; update[name] = goals[name];
+  db.collection('goals').doc(monthKey(viewYear, viewMonth))
+    .set(update, { merge: true })
+    .catch(function(e) { showToast('저장 실패: ' + e.message, true); });
+}
+
+function addRecord() {
+  var name = document.getElementById('selName').value;
+  var km   = parseFloat(document.getElementById('inpKm').value);
+  var date = document.getElementById('inpDate').value;
+  if (!name) { showToast('이름을 선택해주세요!', true); return; }
+  if (!km || km <= 0) { showToast('거리를 입력해주세요!', true); return; }
+  if (!date) { showToast('날짜를 선택해주세요!', true); return; }
+
+  var btn = document.getElementById('btnAdd');
+  btn.disabled = true; btn.textContent = '저장 중...';
+
+  db.collection('records_' + monthKey(viewYear, viewMonth)).add({
+    name: name, km: km, date: date, createdAt: Date.now()
+  }).then(function() {
     document.getElementById('inpKm').value = '';
-    render();
     showToast(name + ' +' + km + 'km 추가! 🔥');
-  };
+  }).catch(function(e) {
+    showToast('저장 실패: ' + e.message, true);
+  }).finally(function() {
+    btn.disabled = false; btn.textContent = '+ 추가';
+  });
+}
 
-  window.deleteRecord = function(id) {
-    records = records.filter(function(r) { return r.id !== id; });
-    save();
-    render();
-  };
+function deleteRecord(id) {
+  if (!confirm('이 기록을 삭제할까요?')) return;
+  db.collection('records_' + monthKey(viewYear, viewMonth)).doc(id).delete()
+    .then(function() { showToast('삭제됐어요!'); })
+    .catch(function(e) { showToast('삭제 실패: ' + e.message, true); });
+}
 
-  function getTotals() {
-    var t = {};
-    NAMES.forEach(function(n) { t[n] = 0; });
-    records.forEach(function(r) { if (t[r.name] !== undefined) t[r.name] += r.km; });
-    return t;
+function render() {
+  var totals = {};
+  NAMES.forEach(function(n) { totals[n] = 0; });
+  records.forEach(function(r) { if (totals[r.name] !== undefined) totals[r.name] += r.km; });
+
+  var sorted = NAMES.slice().sort(function(a,b) { return totals[b]-totals[a]; });
+  var allKm = NAMES.reduce(function(s,n) { return s+totals[n]; }, 0);
+
+  document.getElementById('totalKm').innerHTML = allKm.toFixed(1)+'<span class="unit">km</span>';
+  document.getElementById('totalSessions').innerHTML = records.length+'<span class="unit">회</span>';
+  document.getElementById('avgKm').innerHTML = (allKm/NAMES.length).toFixed(1)+'<span class="unit">km</span>';
+
+  var list = document.getElementById('runnersList');
+  list.innerHTML = '';
+  sorted.forEach(function(name, idx) {
+    var km = totals[name], goal = goals[name]||50;
+    var pct = goal > 0 ? Math.min(100, km/goal*100) : 0;
+    var done = pct >= 100;
+    var ei = NAMES.indexOf(name);
+    var msg = done ? '🎉 목표 달성! '+km.toFixed(1)+' / '+goal+' km'
+                   : km.toFixed(1)+' / '+goal+' km · '+pct.toFixed(1)+'% 달성';
+    var card = document.createElement('div');
+    card.className = 'runner-card rank-'+(idx+1);
+    card.innerHTML =
+      '<div class="runner-top">'
+        +'<div class="rank-num">'+(idx+1)+'</div>'
+        +'<div class="runner-avatar">'+EMOJIS[ei]+'</div>'
+        +'<div class="runner-info"><div class="runner-name">'+name+'</div><div class="runner-meta">목표: '+goal+' km</div></div>'
+        +'<div class="runner-km"><div class="km-value">'+km.toFixed(1)+'</div><div class="km-label">KM</div></div>'
+      +'</div>'
+      +'<div class="track-labels"><span>0 km</span><span>'+goal+' km</span></div>'
+      +'<div class="track-bar"><div class="track-fill'+(done?' done':'')+'" style="width:'+Math.max(pct,0.5)+'%">'
+        +'<div class="runner-icon">'+(done?'🏅':'🏃')+'</div></div></div>'
+      +'<div class="pct-text'+(done?' done':'')+'"><strong>'+pct.toFixed(1)+'%</strong> · '+msg+'</div>';
+    list.appendChild(card);
+  });
+
+  var tbody = document.getElementById('logBody');
+  var sr = records.slice().sort(function(a,b) { return b.date > a.date ? 1 : -1; });
+  if (!sr.length) {
+    tbody.innerHTML = '<tr><td colspan="4" class="empty-msg">이 달 기록이 없어요 🏃</td></tr>';
+  } else {
+    tbody.innerHTML = sr.map(function(r) {
+      var del = isCurrentMonth ? '<button class="del-btn" onclick="deleteRecord(\''+r.id+'\')">✕</button>' : '';
+      return '<tr><td>'+r.date+'</td><td>'+r.name+'</td><td><strong>'+r.km.toFixed(2)+' km</strong></td><td>'+del+'</td></tr>';
+    }).join('');
   }
+}
 
-  function render() {
-    var totals = getTotals();
-    var sorted = NAMES.slice().sort(function(a,b) { return totals[b]-totals[a]; });
-    var allKm  = NAMES.reduce(function(s,n) { return s + totals[n]; }, 0);
+function showToast(msg, isErr) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast'+(isErr?' error':'')+' show';
+  setTimeout(function() { t.className = 'toast'+(isErr?' error':''); }, 2500);
+}
 
-    document.getElementById('totalKm').innerHTML       = allKm.toFixed(1) + '<span class="unit">km</span>';
-    document.getElementById('totalSessions').innerHTML = records.length   + '<span class="unit">회</span>';
-    document.getElementById('avgKm').innerHTML         = (allKm/NAMES.length).toFixed(1) + '<span class="unit">km</span>';
+document.getElementById('btnPrev').addEventListener('click', function() { monthOffset--; initView(); });
+document.getElementById('btnNext').addEventListener('click', function() { if (monthOffset < 0) { monthOffset++; initView(); } });
 
-    var list = document.getElementById('runnersList');
-    list.innerHTML = '';
-
-    sorted.forEach(function(name, idx) {
-      var km   = totals[name];
-      var goal = goals[name] || 50;
-      var pct  = goal > 0 ? Math.min(100, km/goal*100) : 0;
-      var done = pct >= 100;
-      var ei   = NAMES.indexOf(name);
-      var msg  = done
-        ? '🎉 목표 달성! ' + km.toFixed(1) + ' / ' + goal + ' km'
-        : km.toFixed(1) + ' / ' + goal + ' km · ' + pct.toFixed(1) + '% 달성';
-
-      var card = document.createElement('div');
-      card.className = 'runner-card rank-' + (idx+1);
-      card.innerHTML =
-        '<div class="runner-top">'
-          + '<div class="rank-num">'+(idx+1)+'</div>'
-          + '<div class="runner-avatar">'+EMOJIS[ei]+'</div>'
-          + '<div class="runner-info">'
-            + '<div class="runner-name">'+name+'</div>'
-            + '<div class="runner-meta">목표: '+goal+' km</div>'
-          + '</div>'
-          + '<div class="runner-km">'
-            + '<div class="km-value">'+km.toFixed(1)+'</div>'
-            + '<div class="km-label">KM</div>'
-          + '</div>'
-        + '</div>'
-        + '<div>'
-          + '<div class="track-labels"><span>0 km</span><span>'+goal+' km</span></div>'
-          + '<div class="track-bar">'
-            + '<div class="track-fill'+(done?' done':'')+'" style="width:'+Math.max(pct,0.5)+'%">'
-              + '<div class="runner-icon">'+(done?'🏅':'🏃')+'</div>'
-            + '</div>'
-          + '</div>'
-          + '<div class="pct-text'+(done?' done':'')+'"><strong>'+pct.toFixed(1)+'%</strong> · '+msg+'</div>'
-        + '</div>';
-      list.appendChild(card);
-    });
-
-    var tbody = document.getElementById('logBody');
-    var sr = records.slice().sort(function(a,b) { return b.date > a.date ? 1 : -1; });
-    if (!sr.length) {
-      tbody.innerHTML = '<tr><td colspan="4" class="empty-msg">아직 기록이 없습니다 🏃</td></tr>';
-    } else {
-      tbody.innerHTML = sr.map(function(r) {
-        return '<tr>'
-          + '<td>'+r.date+'</td>'
-          + '<td>'+r.name+'</td>'
-          + '<td><strong>'+r.km.toFixed(2)+' km</strong></td>'
-          + '<td><button class="del-btn" onclick="deleteRecord('+r.id+')">✕</button></td>'
-          + '</tr>';
-      }).join('');
-    }
-  }
-
-  function showToast(msg) {
-    var t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(function() { t.classList.remove('show'); }, 2400);
-  }
-
-  buildGoalGrid();
-  render();
-})();
+initView();
 </script>
 
 </body>
