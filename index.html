@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNIST ME 러닝크루 🏃</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --card: #1a1a28;
+    --border: #2a2a40;
+    --accent: #ff4d1c;
+    --accent2: #ff8c42;
+    --neon: #00f5a0;
+    --text: #f0f0f8;
+    --muted: #6060a0;
+    --track: #1e1e30;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘Noto Sans KR’, sans-serif;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* Animated background */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background:
+radial-gradient(ellipse 60% 40% at 20% 10%, rgba(255,77,28,0.08) 0%, transparent 60%),
+radial-gradient(ellipse 50% 50% at 80% 90%, rgba(0,245,160,0.06) 0%, transparent 60%);
+pointer-events: none;
+z-index: 0;
+}
+
+.container {
+max-width: 860px;
+margin: 0 auto;
+padding: 32px 20px 60px;
+position: relative;
+z-index: 1;
+}
+
+/* HEADER */
+header {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.badge {
+display: inline-block;
+background: var(–accent);
+color: white;
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 3px;
+padding: 4px 14px;
+border-radius: 2px;
+text-transform: uppercase;
+margin-bottom: 12px;
+}
+
+header h1 {
+font-family: ‘Bebas Neue’, cursive;
+font-size: clamp(42px, 8vw, 72px);
+letter-spacing: 4px;
+line-height: 1;
+color: var(–text);
+}
+
+header h1 span {
+color: var(–accent);
+}
+
+.subtitle {
+font-size: 13px;
+color: var(–muted);
+letter-spacing: 2px;
+margin-top: 8px;
+text-transform: uppercase;
+}
+
+.month-badge {
+display: inline-block;
+margin-top: 16px;
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 999px;
+padding: 6px 20px;
+font-size: 14px;
+font-weight: 500;
+color: var(–neon);
+letter-spacing: 1px;
+}
+
+/* SECTIONS */
+.section-title {
+font-family: ‘Black Han Sans’, sans-serif;
+font-size: 13px;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 16px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.section-title::after {
+content: ‘’;
+flex: 1;
+height: 1px;
+background: var(–border);
+}
+
+/* INPUT PANEL */
+.input-panel {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 24px;
+margin-bottom: 32px;
+position: relative;
+overflow: hidden;
+}
+
+.input-panel::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 2px;
+background: linear-gradient(90deg, var(–accent), var(–accent2));
+}
+
+.input-grid {
+display: grid;
+grid-template-columns: 1fr 1fr 130px auto;
+gap: 12px;
+align-items: end;
+}
+
+@media (max-width: 600px) {
+.input-grid {
+grid-template-columns: 1fr 1fr;
+}
+.input-grid .btn-add {
+grid-column: 1 / -1;
+}
+}
+
+.input-group {
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+.input-group label {
+font-size: 11px;
+color: var(–muted);
+letter-spacing: 2px;
+text-transform: uppercase;
+font-weight: 500;
+}
+
+select, input[type=“number”], input[type=“date”] {
+background: var(–track);
+border: 1px solid var(–border);
+border-radius: 8px;
+color: var(–text);
+padding: 10px 14px;
+font-size: 14px;
+font-family: ‘Noto Sans KR’, sans-serif;
+outline: none;
+transition: border-color 0.2s;
+width: 100%;
+}
+
+select:focus, input:focus {
+border-color: var(–accent);
+}
+
+select option { background: var(–surface); }
+
+.btn-add {
+background: linear-gradient(135deg, var(–accent), var(–accent2));
+border: none;
+border-radius: 8px;
+color: white;
+font-size: 14px;
+font-weight: 700;
+letter-spacing: 1px;
+padding: 10px 22px;
+cursor: pointer;
+transition: all 0.2s;
+white-space: nowrap;
+font-family: ‘Noto Sans KR’, sans-serif;
+}
+.btn-add:hover {
+transform: translateY(-1px);
+box-shadow: 0 4px 16px rgba(255,77,28,0.4);
+}
+.btn-add:active { transform: translateY(0); }
+
+/* GOAL PANEL */
+.goal-panel {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 24px;
+margin-bottom: 32px;
+}
+
+.goal-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+gap: 12px;
+margin-top: 4px;
+}
+
+.goal-item {
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+.goal-item label {
+font-size: 12px;
+color: var(–muted);
+font-weight: 500;
+}
+
+.goal-input-wrap {
+position: relative;
+}
+
+.goal-input-wrap input {
+padding-right: 32px;
+}
+
+.goal-input-wrap::after {
+content: ‘km’;
+position: absolute;
+right: 10px;
+top: 50%;
+transform: translateY(-50%);
+font-size: 11px;
+color: var(–muted);
+pointer-events: none;
+}
+
+/* LEADERBOARD */
+.runners-list {
+display: flex;
+flex-direction: column;
+gap: 14px;
+}
+
+.runner-card {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 14px;
+padding: 18px 22px;
+position: relative;
+overflow: hidden;
+transition: border-color 0.3s, transform 0.2s;
+}
+
+.runner-card:hover {
+border-color: rgba(255,77,28,0.3);
+transform: translateX(3px);
+}
+
+.runner-card.rank-1 {
+border-color: rgba(255,215,0,0.3);
+background: linear-gradient(135deg, #1a1a28 0%, #1f1a10 100%);
+}
+.runner-card.rank-1::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background: linear-gradient(135deg, rgba(255,215,0,0.04), transparent);
+pointer-events: none;
+}
+
+.runner-top {
+display: flex;
+align-items: center;
+gap: 14px;
+margin-bottom: 12px;
+}
+
+.rank-num {
+font-family: ‘Bebas Neue’, cursive;
+font-size: 28px;
+color: var(–border);
+width: 32px;
+text-align: center;
+line-height: 1;
+flex-shrink: 0;
+}
+
+.rank-1 .rank-num { color: #ffd700; }
+.rank-2 .rank-num { color: #c0c0c0; }
+.rank-3 .rank-num { color: #cd7f32; }
+
+.runner-avatar {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background: var(–track);
+border: 2px solid var(–border);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 18px;
+flex-shrink: 0;
+}
+
+.runner-info {
+flex: 1;
+}
+
+.runner-name {
+font-weight: 700;
+font-size: 16px;
+letter-spacing: 0.5px;
+}
+
+.runner-meta {
+font-size: 11px;
+color: var(–muted);
+margin-top: 2px;
+}
+
+.runner-km {
+text-align: right;
+flex-shrink: 0;
+}
+
+.km-value {
+font-family: ‘Bebas Neue’, cursive;
+font-size: 32px;
+color: var(–accent2);
+line-height: 1;
+}
+
+.km-label {
+font-size: 11px;
+color: var(–muted);
+letter-spacing: 1px;
+}
+
+/* TRACK BAR */
+.track-wrap {
+position: relative;
+}
+
+.track-labels {
+display: flex;
+justify-content: space-between;
+font-size: 10px;
+color: var(–muted);
+margin-bottom: 4px;
+letter-spacing: 1px;
+}
+
+.track-bar {
+background: var(–track);
+border-radius: 999px;
+height: 20px;
+position: relative;
+overflow: visible;
+}
+
+.track-fill {
+height: 100%;
+border-radius: 999px;
+background: linear-gradient(90deg, var(–accent), var(–accent2));
+position: relative;
+transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+min-width: 0%;
+max-width: 100%;
+}
+
+.track-fill.done {
+background: linear-gradient(90deg, var(–neon), #00c87a);
+}
+
+.runner-icon {
+position: absolute;
+right: -16px;
+top: 50%;
+transform: translateY(-50%);
+font-size: 22px;
+filter: drop-shadow(0 0 6px rgba(255,140,66,0.7));
+animation: bounce 0.6s ease-in-out infinite alternate;
+z-index: 2;
+pointer-events: none;
+}
+
+.track-fill.done .runner-icon {
+filter: drop-shadow(0 0 8px rgba(0,245,160,0.8));
+}
+
+@keyframes bounce {
+from { transform: translateY(-60%); }
+to   { transform: translateY(-40%); }
+}
+
+.pct-text {
+font-size: 11px;
+color: var(–muted);
+margin-top: 6px;
+text-align: right;
+}
+
+.pct-text strong {
+color: var(–accent2);
+font-weight: 700;
+}
+
+.pct-text.done strong { color: var(–neon); }
+
+/* LOG TABLE */
+.log-section {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 20px 24px;
+margin-top: 32px;
+}
+
+.log-table {
+width: 100%;
+border-collapse: collapse;
+font-size: 13px;
+margin-top: 8px;
+}
+
+.log-table th {
+color: var(–muted);
+font-weight: 500;
+letter-spacing: 2px;
+font-size: 10px;
+text-transform: uppercase;
+text-align: left;
+padding: 8px 4px;
+border-bottom: 1px solid var(–border);
+}
+
+.log-table td {
+padding: 9px 4px;
+border-bottom: 1px solid rgba(42,42,64,0.5);
+color: var(–text);
+}
+
+.log-table tr:last-child td { border-bottom: none; }
+
+.log-table .del-btn {
+background: none;
+border: none;
+color: var(–muted);
+cursor: pointer;
+font-size: 14px;
+padding: 2px 6px;
+border-radius: 4px;
+transition: color 0.2s, background 0.2s;
+}
+
+.log-table .del-btn:hover {
+color: var(–accent);
+background: rgba(255,77,28,0.1);
+}
+
+.empty-msg {
+text-align: center;
+color: var(–muted);
+padding: 20px;
+font-size: 13px;
+}
+
+/* TOAST */
+.toast {
+position: fixed;
+bottom: 32px;
+right: 32px;
+background: var(–neon);
+color: #0a0a0f;
+padding: 12px 22px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 14px;
+z-index: 999;
+transform: translateY(80px);
+opacity: 0;
+transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+pointer-events: none;
+}
+.toast.show {
+transform: translateY(0);
+opacity: 1;
+}
+
+/* STATS ROW */
+.stats-row {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 12px;
+margin-bottom: 32px;
+}
+
+.stat-card {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 16px 20px;
+text-align: center;
+}
+
+.stat-val {
+font-family: ‘Bebas Neue’, cursive;
+font-size: 36px;
+color: var(–text);
+line-height: 1;
+}
+
+.stat-val span {
+font-size: 16px;
+color: var(–muted);
+font-family: ‘Noto Sans KR’, sans-serif;
+}
+
+.stat-label {
+font-size: 10px;
+color: var(–muted);
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-top: 4px;
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(–bg); }
+::-webkit-scrollbar-thumb { background: var(–border); border-radius: 3px; }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+
+  <header>
+    <div class="badge">UNIST · ME Dept</div>
+    <h1>RUNNING<span>CREW</span></h1>
+    <p class="subtitle">기계공학과 러닝크루 · 나를 이겨라 챌린지</p>
+    <div class="month-badge" id="monthBadge"></div>
+  </header>
+
+  <!-- STATS ROW -->
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-val" id="totalKm">0<span>km</span></div>
+      <div class="stat-label">이번 달 총합</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="totalSessions">0<span>회</span></div>
+      <div class="stat-label">총 러닝 횟수</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="avgKm">0<span>km</span></div>
+      <div class="stat-label">1인 평균</div>
+    </div>
+  </div>
+
+  <!-- INPUT PANEL -->
+
+  <div class="section-title">기록 입력</div>
+  <div class="input-panel">
+    <div class="input-grid">
+      <div class="input-group">
+        <label>이름</label>
+        <select id="selName">
+          <option value="">선택</option>
+          <option>김태성</option>
+          <option>박영빈</option>
+          <option>지우석</option>
+          <option>이강수</option>
+          <option>정임두</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>거리 (km)</label>
+        <input type="number" id="inpKm" placeholder="0.0" step="0.01" min="0">
+      </div>
+      <div class="input-group">
+        <label>날짜</label>
+        <input type="date" id="inpDate">
+      </div>
+      <button class="btn-add" onclick="addRecord()">+ 추가</button>
+    </div>
+  </div>
+
+  <!-- GOAL PANEL -->
+
+  <div class="section-title">이번 달 목표 (나를 이겨라 챌린지)</div>
+  <div class="goal-panel">
+    <div class="goal-grid" id="goalGrid"></div>
+  </div>
+
+  <!-- LEADERBOARD -->
+
+  <div class="section-title">랭킹 & 진행도</div>
+  <div class="runners-list" id="runnersList"></div>
+
+  <!-- LOG -->
+
+  <div class="log-section">
+    <div class="section-title" style="margin-bottom:0">기록 로그</div>
+    <table class="log-table">
+      <thead>
+        <tr>
+          <th>날짜</th>
+          <th>이름</th>
+          <th>거리</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="logBody">
+        <tr><td colspan="4" class="empty-msg">아직 기록이 없습니다 🏃</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const NAMES = ['김태성', '박영빈', '지우석', '이강수', '정임두'];
+const EMOJIS = ['🏃','🦅','⚡','🔥','🌪️'];
+
+let records = JSON.parse(localStorage.getItem('runcrew_records') || '[]');
+let goals   = JSON.parse(localStorage.getItem('runcrew_goals')   || '{}');
+
+// Init defaults
+NAMES.forEach(n => { if (!goals[n]) goals[n] = 50; });
+
+// Month badge
+const now = new Date();
+document.getElementById('monthBadge').textContent =
+  `${now.getFullYear()}년 ${now.getMonth()+1}월`;
+
+// Default date
+document.getElementById('inpDate').valueAsDate = new Date();
+
+// Build goal inputs
+function buildGoalGrid() {
+  const grid = document.getElementById('goalGrid');
+  grid.innerHTML = '';
+  NAMES.forEach(name => {
+    const div = document.createElement('div');
+    div.className = 'goal-item';
+    div.innerHTML = `
+      <label>${name}</label>
+      <div class="goal-input-wrap">
+        <input type="number" min="0" step="1" value="${goals[name]||50}"
+          oninput="updateGoal('${name}', this.value)">
+      </div>`;
+    grid.appendChild(div);
+  });
+}
+
+function updateGoal(name, val) {
+  goals[name] = parseFloat(val) || 0;
+  localStorage.setItem('runcrew_goals', JSON.stringify(goals));
+  render();
+}
+
+function addRecord() {
+  const name = document.getElementById('selName').value;
+  const km   = parseFloat(document.getElementById('inpKm').value);
+  const date = document.getElementById('inpDate').value;
+
+  if (!name) return showToast('이름을 선택해주세요!');
+  if (!km || km <= 0) return showToast('거리를 입력해주세요!');
+  if (!date) return showToast('날짜를 선택해주세요!');
+
+  records.push({ id: Date.now(), name, km, date });
+  localStorage.setItem('runcrew_records', JSON.stringify(records));
+  document.getElementById('inpKm').value = '';
+  render();
+  showToast(`${name} +${km}km 추가! 🔥`);
+}
+
+function deleteRecord(id) {
+  records = records.filter(r => r.id !== id);
+  localStorage.setItem('runcrew_records', JSON.stringify(records));
+  render();
+}
+
+function getTotals() {
+  const t = {};
+  NAMES.forEach(n => t[n] = 0);
+  records.forEach(r => { if (t[r.name] !== undefined) t[r.name] += r.km; });
+  return t;
+}
+
+function render() {
+  const totals = getTotals();
+  const sorted = [...NAMES].sort((a,b) => totals[b] - totals[a]);
+
+  // Stats
+  const allKm = Object.values(totals).reduce((a,b)=>a+b,0);
+  document.getElementById('totalKm').innerHTML = `${allKm.toFixed(1)}<span>km</span>`;
+  document.getElementById('totalSessions').innerHTML = `${records.length}<span>회</span>`;
+  document.getElementById('avgKm').innerHTML = `${(allKm/NAMES.length).toFixed(1)}<span>km</span>`;
+
+  // Runners list
+  const list = document.getElementById('runnersList');
+  list.innerHTML = '';
+  sorted.forEach((name, idx) => {
+    const km   = totals[name];
+    const goal = goals[name] || 50;
+    const pct  = Math.min(100, goal > 0 ? (km / goal * 100) : 0);
+    const done = pct >= 100;
+    const emojiIdx = NAMES.indexOf(name);
+
+    const card = document.createElement('div');
+    card.className = `runner-card rank-${idx+1}`;
+
+    let pctMsg = done
+      ? `🎉 목표 달성! ${km.toFixed(1)} / ${goal} km`
+      : `${km.toFixed(1)} / ${goal} km · ${pct.toFixed(1)}% 달성`;
+
+    card.innerHTML = `
+      <div class="runner-top">
+        <div class="rank-num">${idx+1}</div>
+        <div class="runner-avatar">${EMOJIS[emojiIdx]}</div>
+        <div class="runner-info">
+          <div class="runner-name">${name}</div>
+          <div class="runner-meta">목표: ${goal} km</div>
+        </div>
+        <div class="runner-km">
+          <div class="km-value">${km.toFixed(1)}</div>
+          <div class="km-label">KM</div>
+        </div>
+      </div>
+      <div class="track-wrap">
+        <div class="track-labels">
+          <span>0 km</span>
+          <span>${goal} km</span>
+        </div>
+        <div class="track-bar">
+          <div class="track-fill ${done?'done':''}" style="width:${pct}%">
+            <div class="runner-icon">${done?'🏅':'🏃'}</div>
+          </div>
+        </div>
+        <div class="pct-text ${done?'done':''}"><strong>${pct.toFixed(1)}%</strong> · ${pctMsg}</div>
+      </div>`;
+    list.appendChild(card);
+  });
+
+  // Log table
+  const tbody = document.getElementById('logBody');
+  const sorted_records = [...records].sort((a,b) => b.date.localeCompare(a.date));
+  if (sorted_records.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" class="empty-msg">아직 기록이 없습니다 🏃</td></tr>';
+  } else {
+    tbody.innerHTML = sorted_records.map(r => `
+      <tr>
+        <td>${r.date}</td>
+        <td>${r.name}</td>
+        <td><strong>${r.km.toFixed(2)} km</strong></td>
+        <td><button class="del-btn" onclick="deleteRecord(${r.id})">✕</button></td>
+      </tr>`).join('');
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+buildGoalGrid();
+render();
+</script>
+
+</body>
+</html>
