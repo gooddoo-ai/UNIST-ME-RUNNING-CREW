@@ -322,9 +322,9 @@ function render() {
   var sorted = NAMES.slice().sort(function(a,b) { return totals[b]-totals[a]; });
   var allKm = NAMES.reduce(function(s,n) { return s+totals[n]; }, 0);
 
-  document.getElementById('totalKm').innerHTML = allKm.toFixed(1)+'<span class="unit">km</span>';
+  document.getElementById('totalKm').innerHTML = allKm.toFixed(2)+'<span class="unit">km</span>';
   document.getElementById('totalSessions').innerHTML = records.length+'<span class="unit">회</span>';
-  document.getElementById('avgKm').innerHTML = (allKm/NAMES.length).toFixed(1)+'<span class="unit">km</span>';
+  document.getElementById('avgKm').innerHTML = (allKm/NAMES.length).toFixed(2)+'<span class="unit">km</span>';
 
   var list = document.getElementById('runnersList');
   list.innerHTML = '';
@@ -333,8 +333,8 @@ function render() {
     var pct = goal > 0 ? Math.min(100, km/goal*100) : 0;
     var done = pct >= 100;
     var ei = NAMES.indexOf(name);
-    var msg = done ? '🎉 목표 달성! '+km.toFixed(1)+' / '+goal+' km'
-                   : km.toFixed(1)+' / '+goal+' km · '+pct.toFixed(1)+'% 달성';
+    var msg = done ? '🎉 목표 달성! '+km.toFixed(2)+' / '+goal+' km'
+                   : km.toFixed(2)+' / '+goal+' km · '+pct.toFixed(1)+'% 달성';
     var card = document.createElement('div');
     card.className = 'runner-card rank-'+(idx+1);
     card.innerHTML =
@@ -342,7 +342,7 @@ function render() {
         +'<div class="rank-num">'+(idx+1)+'</div>'
         +'<div class="runner-avatar">'+EMOJIS[ei]+'</div>'
         +'<div class="runner-info"><div class="runner-name">'+name+'</div><div class="runner-meta">목표: '+goal+' km</div></div>'
-        +'<div class="runner-km"><div class="km-value">'+km.toFixed(1)+'</div><div class="km-label">KM</div></div>'
+        +'<div class="runner-km"><div class="km-value">'+km.toFixed(2)+'</div><div class="km-label">KM</div></div>'
       +'</div>'
       +'<div class="track-labels"><span>0 km</span><span>'+goal+' km</span></div>'
       +'<div class="track-bar"><div class="track-fill'+(done?' done':'')+'" style="width:'+Math.max(pct,0.5)+'%">'
